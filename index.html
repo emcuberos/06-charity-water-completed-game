@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Waterfinder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+      <div class="shell header-inner">
+        <img
+          src="Logo.jpg"
+          alt="charity: water logo"
+          class="cw-logo"
+        />
+        <div class="header-text">
+          <h1>The Waterfinder</h1>
+          <p class="tagline">Drill deep. Avoid the bad water.</p>
+        </div>
+      </div>
+      <div class="header-rule"></div>
+    </header>
+
+    <main class="shell">
+      <section class="intro">
+        <p>
+          Clean water sits deep underground, below the contamination near the
+          surface. Dig a tunnel from the pump down to the wellhead — but one
+          wrong move floods your shaft with dirty water.
+        </p>
+      </section>
+
+      <div class="level-controls" id="levelControls" hidden>
+        <nav class="tabs" id="levelTabs" aria-label="Difficulty"></nav>
+        <button type="button" id="startGameButton" class="btn btn-primary">
+          Start Game!
+        </button>
+      </div>
+
+      <!-- ================= GAME ================= -->
+      <section class="game-card">
+        <div class="status-bar">
+          <div class="status-group">
+            <span class="status-label">Level</span>
+            <strong id="levelName">—</strong>
+          </div>
+          <div class="status-group">
+            <span class="status-label">Time</span>
+            <strong id="timer" class="time">0.0s</strong>
+          </div>
+        </div>
+
+        <!-- the pump the water comes up into -->
+        <div class="pump-row">
+          <svg
+            class="pump"
+            id="pump"
+            viewBox="0 0 64 44"
+            aria-hidden="true"
+          >
+            <rect x="6" y="30" width="26" height="12" rx="2" class="pump-base" />
+            <rect x="15" y="8" width="8" height="24" rx="2" class="pump-stem" />
+            <path
+              d="M19 12 H42 a6 6 0 0 1 6 6 v6"
+              fill="none"
+              stroke-width="7"
+              stroke-linecap="round"
+              class="pump-spout"
+            />
+            <rect x="23" y="4" width="22" height="6" rx="3" class="pump-handle" />
+            <circle cx="48" cy="33" r="4" class="pump-drop" />
+          </svg>
+          <span class="pump-label">Pump</span>
+        </div>
+
+        <div class="board-stage">
+          <div id="board" class="board"></div>
+
+          <div
+            id="overlay"
+            class="overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="overlayTitle"
+          >
+            <div class="overlay-card">
+              <button
+                type="button"
+                id="overlayClose"
+                class="overlay-close"
+                aria-label="Close and look at the board"
+              >
+                ✕
+              </button>
+              <h2 id="overlayTitle">The Waterfinder</h2>
+              <p id="overlayText"></p>
+              <p id="overlayTime" class="overlay-time" hidden></p>
+              <p id="overlayLearn" class="overlay-learn" hidden>
+                <span id="overlayLearnText"></span><br />
+                <a
+                  id="overlayLink"
+                  class="overlay-link"
+                  href="https://www.charitywater.org/our-work"
+                  target="_blank"
+                  rel="noopener"
+                  >Click here to learn more!</a
+                >
+              </p>
+              <div id="overlayButtons" class="overlay-buttons"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- the clay layer between the dig and the water, with the
+             wellhead's shaft running down through it -->
+        <div class="subsurface">
+          <span class="subsurface-label">Clay layer</span>
+          <div class="well-connector" id="wellConnector"></div>
+        </div>
+
+        <!-- the aquifer the wellhead opens into -->
+        <div class="aquifer">
+          <span>Clean aquifer</span>
+        </div>
+
+        <p class="legend">
+          <span class="key key-dirt"></span> undug ground
+          <span class="key key-clay"></span> clay
+          <span class="key key-dug"></span> lined shaft
+          <span class="key key-goal"></span> wellhead
+          <span class="key key-bad"></span> dirty water
+          <span class="key key-flag"></span> blockade &nbsp;·&nbsp;
+          <span id="interactionHint">Right click to place one.</span>
+        </p>
+      </section>
+
+      <!-- ================= SUBSCRIBE ================= -->
+      <section class="subscribe">
+        <h2>Stay informed</h2>
+        <p>Get updates on charity: water's work bringing clean water to all.</p>
+        <form id="subscribeForm" class="subscribe-form">
+          <label for="email" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="subscribe-msg" id="subscribeMsg" role="status"></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <p>
+          Charity: water is a nonprofit organization bringing clean and safe drinking water to people in developing countries. Learn more at
+          <a href="https://www.charitywater.org" target="_blank" rel="noopener"
+            >https://www.charitywater.org.</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

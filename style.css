@@ -1,0 +1,946 @@
+/* ============================================================
+   THE WATERFINDER
+   charity: water brand colours
+     yellow #FFC907 · blue #2E9DF7 · teal #8BD1CB
+     orange #FF902A · red #F5402C
+   ============================================================ */
+
+:root {
+  --cw-yellow: #ffc907;
+  --cw-blue: #2e9df7;
+  --cw-blue-deep: #1668a8;
+  --cw-orange: #ff902a;
+  --cw-red: #f5402c;
+
+  --ink: #1f2322;
+  --ink-soft: #6b7472;
+  --line: #e6e3dc;
+  --page: #ffffff;
+  --panel: #faf8f4;
+
+  --dirt: #a08f72;
+  --dirt-edge: #cfc6b4;
+  --tunnel: #c6cccb;
+  --clay: #9c7f63;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", "Segoe UI", Helvetica, Arial, sans-serif;
+  background-color: var(--page);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  padding-top: 28px;
+}
+
+.header-inner {
+  position: relative;
+  display: flex;
+  min-height: 90px;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.cw-logo {
+  position: absolute;
+  left: 39px;
+  top: 0;
+  height: 58px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.header-text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
+
+.header-text h1 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.tagline {
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.header-rule {
+  height: 6px;
+  background-color: var(--cw-yellow);
+}
+
+/* ---------- Intro ---------- */
+
+.intro {
+  padding: 26px 20px 4px;
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.intro p {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.intro p {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* ---------- Level tabs ---------- */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+  padding: 0;
+}
+
+.level-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 20px 0;
+}
+
+.level-controls[hidden] {
+  display: none;
+}
+
+.level-controls .btn {
+  flex-shrink: 0;
+}
+
+.tab {
+  background-color: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.tab:hover {
+  border-color: var(--cw-yellow);
+  color: var(--ink);
+}
+
+.tab.active {
+  background-color: var(--cw-yellow);
+  border-color: var(--cw-yellow);
+  color: var(--ink);
+}
+
+/* ---------- Game card ---------- */
+
+.game-card {
+  margin: 18px 20px 0;
+  scroll-margin-top: 8px;
+  background-color: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 18px 20px;
+}
+
+.status-bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+  padding: 10px 0 12px;
+  background-color: var(--panel);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+
+.status-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.status-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.status-group strong {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.time {
+  font-variant-numeric: tabular-nums;
+  color: var(--cw-blue);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-primary {
+  background-color: var(--cw-yellow);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  background-color: #ffd63d;
+}
+
+.btn-blue {
+  background-color: var(--cw-blue);
+  color: #fff;
+  padding: 9px 18px;
+  font-size: 13px;
+}
+
+.btn-blue:hover:not(:disabled) {
+  background-color: var(--cw-blue-deep);
+}
+
+.btn-blue:disabled {
+  background-color: #d7d3cb;
+  color: #fff;
+  cursor: default;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  border: 2px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.btn-ghost:hover {
+  border-color: var(--cw-yellow);
+  color: var(--ink);
+}
+
+/* ---------- Pump ---------- */
+
+.pump-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 6px;
+}
+
+.pump {
+  width: 56px;
+  height: 38px;
+}
+
+.pump-base,
+.pump-stem,
+.pump-handle {
+  fill: #8a8f8d;
+}
+
+.pump-spout {
+  stroke: #8a8f8d;
+}
+
+.pump-drop {
+  fill: transparent;
+  transition: fill 0.4s ease;
+}
+
+/* once the water comes up, the pump runs */
+.pump.flowing .pump-base,
+.pump.flowing .pump-stem,
+.pump.flowing .pump-handle {
+  fill: var(--ink);
+}
+
+.pump.flowing .pump-spout {
+  stroke: var(--ink);
+}
+
+.pump.flowing .pump-drop {
+  fill: var(--cw-blue);
+}
+
+.pump.dirty-flowing .pump-drop {
+  fill: #5f8f36;
+}
+
+.pump-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- Board ---------- */
+
+.board-stage {
+  position: relative;
+}
+
+.board {
+  display: grid;
+  gap: 2px;
+  background-color: var(--dirt-edge);
+  padding: 3px;
+  border-radius: 8px 8px 0 0;
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  touch-action: manipulation;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--dirt);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.18s ease, transform 0.08s ease;
+}
+
+/* solid clay - packed either side of the entry shaft, can't be dug */
+.tile.clay {
+  background: repeating-linear-gradient(
+    135deg,
+    #9c7f63 0 5px,
+    #8e735a 5px 10px
+  );
+  cursor: default;
+}
+
+/* dug out - lined well casing, the way a real shaft is cased */
+.tile.revealed {
+  background-color: #c6cccb;
+  color: #1f2322;
+  box-shadow: inset 0 0 0 2px #a7b0af;
+}
+
+/* the wellhead you're drilling toward - visible from the start */
+.tile.goal {
+  background-color: var(--cw-blue);
+  box-shadow: inset 0 0 0 2px #fff, 0 0 0 2px var(--cw-blue);
+  color: #fff;
+}
+
+/* you can dig here right now */
+.tile.diggable {
+  cursor: pointer;
+  box-shadow: inset 0 0 0 2px var(--cw-yellow);
+}
+
+.tile.goal.diggable {
+  box-shadow: inset 0 0 0 3px var(--cw-yellow);
+}
+
+.tile.diggable:hover {
+  transform: scale(1.14);
+  z-index: 2;
+  position: relative;
+}
+
+/* a traffic cone dropped on ground you think is bad */
+.tile.flagged {
+  background-color: var(--dirt);
+  color: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.tile.flagged .fa-road-barrier {
+  color: var(--cw-orange);
+  font-size: clamp(11px, 2.2vw, 18px);
+}
+
+/* Contaminated water, revealed once the round ends. The dirt rim
+   around it matters: without it the green reads as flowing into
+   your clean blue shaft, which is the opposite of what happened. */
+.tile.contaminated {
+  background-color: #6f4a2a;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    #5f8f36 0 58%,
+    transparent 59%
+  );
+  color: transparent;
+  box-shadow: inset 0 0 0 3px #6f4a2a;
+}
+
+/* clean water rising up the finished tunnel */
+.tile.watered {
+  background-color: var(--cw-blue);
+  color: #e8f4ff;
+  box-shadow: none;
+}
+
+/* contaminated water filling the tunnel after a loss */
+.tile.dirty-watered {
+  background-color: #5f8f36;
+  background-image: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+.tile.dirty-watered .fa-droplet {
+  color: #fff;
+}
+
+.tile.revealed {
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 2px;
+}
+
+.drop-layout {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  gap: 1px;
+  padding: 2px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+}
+
+.drop-layout .fa-droplet {
+  color: #4f913d;
+  font-size: clamp(9px, 2vw, 16px);
+  line-height: 1;
+}
+
+.drop-layout.count-1 .fa-droplet:nth-child(1) { grid-area: 2 / 2; }
+
+.drop-layout.count-2 .fa-droplet:nth-child(1) { grid-area: 1 / 1; }
+.drop-layout.count-2 .fa-droplet:nth-child(2) { grid-area: 3 / 3; }
+
+.drop-layout.count-3 .fa-droplet:nth-child(1) { grid-area: 1 / 1; }
+.drop-layout.count-3 .fa-droplet:nth-child(2) { grid-area: 2 / 2; }
+.drop-layout.count-3 .fa-droplet:nth-child(3) { grid-area: 3 / 3; }
+
+.drop-layout.count-4 .fa-droplet:nth-child(1) { grid-area: 1 / 1; }
+.drop-layout.count-4 .fa-droplet:nth-child(2) { grid-area: 1 / 3; }
+.drop-layout.count-4 .fa-droplet:nth-child(3) { grid-area: 3 / 1; }
+.drop-layout.count-4 .fa-droplet:nth-child(4) { grid-area: 3 / 3; }
+
+.drop-layout.count-5 .fa-droplet:nth-child(1) { grid-area: 1 / 1; }
+.drop-layout.count-5 .fa-droplet:nth-child(2) { grid-area: 1 / 3; }
+.drop-layout.count-5 .fa-droplet:nth-child(3) { grid-area: 2 / 2; }
+.drop-layout.count-5 .fa-droplet:nth-child(4) { grid-area: 3 / 1; }
+.drop-layout.count-5 .fa-droplet:nth-child(5) { grid-area: 3 / 3; }
+
+.drop-layout.count-6 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.drop-layout.count-7 .fa-droplet:nth-child(1) { grid-area: 1 / 1; }
+.drop-layout.count-7 .fa-droplet:nth-child(2) { grid-area: 1 / 3; }
+.drop-layout.count-7 .fa-droplet:nth-child(3) { grid-area: 2 / 1; }
+.drop-layout.count-7 .fa-droplet:nth-child(4) { grid-area: 2 / 2; }
+.drop-layout.count-7 .fa-droplet:nth-child(5) { grid-area: 2 / 3; }
+.drop-layout.count-7 .fa-droplet:nth-child(6) { grid-area: 3 / 1; }
+.drop-layout.count-7 .fa-droplet:nth-child(7) { grid-area: 3 / 3; }
+
+.drop-layout.count-8 .fa-droplet:nth-child(1) { grid-area: 1 / 1; }
+.drop-layout.count-8 .fa-droplet:nth-child(2) { grid-area: 1 / 2; }
+.drop-layout.count-8 .fa-droplet:nth-child(3) { grid-area: 1 / 3; }
+.drop-layout.count-8 .fa-droplet:nth-child(4) { grid-area: 2 / 1; }
+.drop-layout.count-8 .fa-droplet:nth-child(5) { grid-area: 2 / 3; }
+.drop-layout.count-8 .fa-droplet:nth-child(6) { grid-area: 3 / 1; }
+.drop-layout.count-8 .fa-droplet:nth-child(7) { grid-area: 3 / 2; }
+.drop-layout.count-8 .fa-droplet:nth-child(8) { grid-area: 3 / 3; }
+
+.tile.count-1 .fa-droplet { color: #578f43; }
+.tile.count-2 .fa-droplet { color: #4e873b; }
+.tile.count-3 .fa-droplet { color: #467f35; }
+.tile.count-4 .fa-droplet { color: #3e7730; }
+.tile.count-5 .fa-droplet { color: #376f2b; }
+.tile.count-6 .fa-droplet { color: #326728; }
+.tile.count-7 .fa-droplet { color: #2e6125; }
+.tile.count-8 .fa-droplet { color: #2a5b22; }
+.tile.watered { color: #fff; }
+
+/* ---------- Clay layer + the shaft running through it ---------- */
+
+.subsurface {
+  position: relative;
+  height: 46px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--clay) 0 7px,
+    #8e735a 7px 14px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subsurface-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* The clean water already sitting under the wellhead, waiting.
+   It's water, not casing - that's the thing you're drilling for. */
+.well-connector {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, var(--cw-blue), var(--cw-blue-deep));
+  box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.35),
+    inset -2px 0 0 rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- Aquifer strip ---------- */
+
+.aquifer {
+  background: linear-gradient(180deg, var(--cw-blue), var(--cw-blue-deep));
+  border-radius: 0 0 8px 8px;
+  padding: 13px 12px;
+  text-align: center;
+}
+
+.aquifer span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ---------- Legend ---------- */
+
+.legend {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.key {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+.key-dirt { background-color: var(--dirt); }
+.key-dug { background-color: #c6cccb; box-shadow: inset 0 0 0 2px #a7b0af; }
+.key-goal { background-color: var(--cw-blue); }
+.key-flag { background-color: var(--cw-orange); }
+.key-clay { background: repeating-linear-gradient(135deg,#9c7f63 0 4px,#8e735a 4px 8px); }
+.key-bad { background-color: #6f4a2a; background-image: radial-gradient(circle at 50% 50%,#5f8f36 0 58%,transparent 59%); }
+
+/* ---------- Subscribe ---------- */
+
+.subscribe {
+  position: relative;
+  overflow: hidden;
+  margin: 40px 20px 0;
+  background-color: var(--cw-yellow);
+  border-radius: 16px;
+  padding: 28px 26px;
+}
+
+.subscribe h2 {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.subscribe p {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.subscribe-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.subscribe-form input {
+  flex: 1;
+  min-width: 200px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  padding: 11px 20px;
+  font-family: inherit;
+  font-size: 14px;
+  background-color: #fff;
+  color: var(--ink);
+}
+
+.subscribe-form input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.subscribe-form .btn-primary {
+  background-color: var(--ink);
+  color: #fff;
+}
+
+.subscribe-msg {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 20px;
+}
+
+/* ---------- Overlay ---------- */
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(31, 35, 34, 0.55);
+  padding: 20px;
+  z-index: 20;
+}
+
+.overlay.start-picker {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  padding: 12px;
+  background-color: rgba(55, 61, 62, 0.48);
+}
+
+.overlay.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-card {
+  position: relative;
+  background-color: #fff;
+  border-radius: 18px;
+  border-top: 8px solid var(--cw-yellow);
+  padding: 34px 30px 28px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+}
+
+.confetti-burst {
+  position: absolute;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+  inset: 0;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 15px;
+  border-radius: 2px;
+  background-color: var(--confetti-color);
+  opacity: 0;
+  animation: confetti-explode 2.1s cubic-bezier(0.15, 0.7, 0.35, 1)
+    var(--confetti-delay) forwards;
+}
+
+.confetti-piece:nth-child(3n) {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+@keyframes confetti-explode {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--confetti-x)),
+        calc(-50% + var(--confetti-y))
+      )
+      scale(1) rotate(720deg);
+  }
+}
+
+.overlay.start-picker .overlay-card {
+  max-height: calc(100vh - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow: hidden;
+  padding: 18px 22px 16px;
+}
+
+.overlay.start-picker .overlay-card h2 {
+  margin-bottom: 6px;
+}
+
+.overlay.start-picker .overlay-card p {
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.overlay-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.overlay-close:hover {
+  background-color: var(--panel);
+  color: var(--ink);
+}
+
+.overlay-card h2 {
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.overlay-card p {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+}
+
+.overlay-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.overlay-time {
+  width: fit-content;
+  margin: 0 auto 18px !important;
+  padding: 11px 20px;
+  border: 1px solid #d7ad00;
+  border-radius: 8px;
+  background: #fff7cf;
+  color: var(--ink);
+  font-size: 21px !important;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay-learn {
+  margin: 0 0 20px;
+  color: #147fc1;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.overlay-learn .overlay-link {
+  margin-top: 3px;
+  color: #147fc1;
+  text-decoration: underline;
+}
+
+.overlay-buttons.has-replay,
+.overlay-buttons.is-start-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.overlay-buttons.has-replay .level-option,
+.overlay-buttons.is-start-picker .level-option {
+  min-height: 42px;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 13px;
+}
+
+.overlay-buttons.has-replay .level-option.is-selected,
+.overlay-buttons.is-start-picker .level-option.is-selected {
+  border-color: var(--cw-blue);
+  background-color: #dff1ff;
+  box-shadow: inset 0 0 0 2px var(--cw-blue);
+  color: var(--ink);
+}
+
+.overlay-buttons.has-replay .play-again,
+.overlay-buttons.is-start-picker .start-game {
+  grid-column: 1 / -1;
+  margin-top: 5px;
+}
+
+.overlay-buttons.is-start-picker .level-option {
+  min-height: 36px;
+  padding: 6px;
+}
+
+.overlay-buttons.is-start-picker .start-game {
+  min-height: 38px;
+  padding: 8px 16px;
+}
+
+.overlay-link {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cw-blue);
+  text-decoration: none;
+}
+
+.overlay-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  margin-top: 44px;
+  padding: 26px 0 36px;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer p {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.site-footer a {
+  color: var(--cw-blue);
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 600px) {
+  .cw-logo { left: 39px; height: 32px; }
+  .header-text h1 { font-size: 25px; }
+  .game-card { padding: 12px 12px 18px; }
+  .status-bar { gap: 16px; }
+  .status-actions { margin-left: 0; width: 100%; justify-content: space-between; }
+  .tile { font-size: 12px; }
+  .subscribe { padding: 22px 18px; }
+  .overlay.start-picker { padding: 6px; }
+  .overlay.start-picker .overlay-card {
+    max-height: calc(100vh - 12px);
+    max-height: calc(100dvh - 12px);
+    padding: 12px 12px 10px;
+    border-top-width: 5px;
+    border-radius: 12px;
+  }
+  .overlay.start-picker .overlay-card h2 {
+    margin-bottom: 4px;
+    font-size: 19px;
+  }
+  .overlay.start-picker .overlay-card p {
+    margin-bottom: 8px;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .overlay-buttons.is-start-picker {
+    gap: 5px;
+  }
+  .overlay-buttons.is-start-picker .level-option {
+    min-height: 30px;
+    padding: 4px;
+    font-size: 11px;
+  }
+  .overlay-buttons.is-start-picker .start-game {
+    min-height: 34px;
+    margin-top: 2px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .level-controls { flex-wrap: wrap; justify-content: center; }
+  .level-controls .tabs { flex-basis: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece {
+    display: none;
+    animation: none;
+  }
+}
