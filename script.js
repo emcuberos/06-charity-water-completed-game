@@ -22,6 +22,8 @@
 const boardEl = document.getElementById("board");
 const timerEl = document.getElementById("timer");
 const levelNameEl = document.getElementById("levelName");
+const milestoneMessageEl = document.getElementById("milestoneMessage");
+const muteBtn = document.getElementById("muteBtn");
 const tabsEl = document.getElementById("levelTabs");
 const levelControlsEl = document.getElementById("levelControls");
 const startGameButtonEl = document.getElementById("startGameButton");
@@ -49,6 +51,13 @@ const hasCoarsePointer =
   window.matchMedia("(pointer: coarse)").matches ||
   hasTouchEmulation;
 
+const digSound = new Audio("dig.mp3");
+digSound.volume = 0.45;
+const loseSound = new Audio("lose.mp3");
+loseSound.volume = 0.7;
+const waterSound = new Audio("water.mp3");
+waterSound.volume = 0.6;
+
 /* ---------- Levels ----------
    totalTiles divides evenly by both 8 and 12, so the board is a
    clean rectangle on phones and on larger screens. */
@@ -68,7 +77,7 @@ const CORRIDOR_ROWS = 3;
 const MIN_DIGS_FRACTION = 0.45;
 
 const MAX_BOARD_ATTEMPTS = 600;
-const WATER_STEP_MS = 40;
+const WATER_STEP_MS = 100;
 
 /* ---------- Game state ---------- */
 let board = [];
@@ -87,6 +96,43 @@ let lastWaterScrollAt = 0;
 let lastTappedTileKey = null;
 let lastTileTapTime = 0;
 let tileTapTimeout = null;
+let soundOn = true;
+let waterSoundTimeout = null;
+let deepestRowReached = CORRIDOR_ROWS - 1;
+let goalClicked = false;
+let milestoneTimeout = null;
+
+const MILESTONES = [
+  {
+    message: "Through the topsoil.",
+    condition: function () {
+      return deepestRowReached >= CORRIDOR_ROWS;
+    },
+    fired: false,
+  },
+  {
+    message: "Halfway to the aquifer.",
+    condition: function () {
+      return currentLevelKey !== "beginner" && deepestRowReached > rows / 2;
+    },
+    fired: false,
+  },
+  {
+    message: "Clean water is in reach — click the blue tile!",
+    condition: function () {
+      if (gameOver || goalClicked) return false;
+
+      const neighbours = neighbours8(goalRow, goalCol);
+      for (let i = 0; i < neighbours.length; i++) {
+        if (board[neighbours[i][0]][neighbours[i][1]].revealed) return true;
+      }
+
+      return false;
+    },
+    persistent: true,
+    fired: false,
+  },
+];
 
 /* ============================================================
    SMALL HELPERS
@@ -94,6 +140,60 @@ let tileTapTimeout = null;
 
 function onBoard(r, c) {
   return r >= 0 && r < rows && c >= 0 && c < cols;
+}
+
+function playSound(audio) {
+  if (!soundOn) return;
+  audio.currentTime = 0;
+  audio.play().catch(function () {});
+}
+
+function showMilestone(message, persistent) {
+  milestoneMessageEl.textContent = message;
+  milestoneMessageEl.classList.add("is-visible");
+
+  clearTimeout(milestoneTimeout);
+  milestoneTimeout = null;
+  if (persistent) return;
+
+  milestoneTimeout = setTimeout(function () {
+    milestoneMessageEl.classList.remove("is-visible");
+    milestoneTimeout = null;
+  }, 2000);
+}
+
+function clearMilestoneMessage() {
+  clearTimeout(milestoneTimeout);
+  milestoneTimeout = null;
+  milestoneMessageEl.classList.remove("is-visible");
+  milestoneMessageEl.textContent = "";
+}
+
+function checkMilestones() {
+  if (!gameOver) {
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        if (board[row][col].revealed && row > deepestRowReached) {
+          deepestRowReached = row;
+        }
+      }
+    }
+  }
+
+  for (let i = 0; i < MILESTONES.length; i++) {
+    const milestone = MILESTONES[i];
+
+    if (gameOver && !milestone.persistent) continue;
+
+    if (!milestone.fired && milestone.condition()) {
+      milestone.fired = true;
+      showMilestone(milestone.message, milestone.persistent);
+    }
+  }
+}
+
+function digAndCheckMilestones(row, col) {
+  digTile(row, col);
 }
 
 function neighbours8(r, c) {
@@ -563,10 +663,12 @@ function digTile(row, col) {
 
   if (tile.contaminated) {
     tile.revealed = true;
+    playSound(loseSound);
     endGame(false, row, col);
     return;
   }
 
+  playSound(digSound);
   openTile(row, col);
   renderBoard();
 
@@ -612,6 +714,12 @@ function startLevel(levelKey, shouldStartClock) {
   placeConnector();
 
   gameOver = false;
+  deepestRowReached = CORRIDOR_ROWS - 1;
+  goalClicked = false;
+  for (let i = 0; i < MILESTONES.length; i++) {
+    MILESTONES[i].fired = false;
+  }
+  clearMilestoneMessage();
   levelNameEl.textContent = level.name;
   pumpEl.classList.remove("flowing");
   pumpEl.classList.remove("dirty-flowing");
@@ -698,6 +806,8 @@ function renderBoard() {
       boardEl.appendChild(tileEl);
     }
   }
+
+  checkMilestones();
 }
 
 /* Line the blue shaft under the board up with the wellhead column,
@@ -752,7 +862,7 @@ function scrollToPump(whenDone) {
 
   window.addEventListener("scrollend", finishScroll, { once: true });
   window.scrollTo({ top: pumpTop, behavior: "smooth" });
-  setTimeout(finishScroll, 1600);
+  setTimeout(finishScroll, 900);
 }
 
 /* ============================================================
@@ -764,6 +874,12 @@ function scrollToPump(whenDone) {
    reaches the pump before the modal appears.
    ============================================================ */
 function floodTunnel(whenDone, startRow, startCol, waterClass) {
+  if (waterClass !== "dirty-watered") {
+    clearTimeout(waterSoundTimeout);
+    waterSoundTimeout = null;
+    playSound(waterSound);
+  }
+
   const distance = [];
   for (let r = 0; r < rows; r++) distance.push(new Array(cols).fill(-1));
 
@@ -810,7 +926,7 @@ function floodTunnel(whenDone, startRow, startCol, waterClass) {
     }
   }
 
-  if (classToAdd === "watered" && lastTopFillStep >= 0) {
+  if (lastTopFillStep >= 0) {
     furthest = Math.max(furthest, lastLowerFillStep + 1);
   }
 
@@ -824,7 +940,7 @@ function floodTunnel(whenDone, startRow, startCol, waterClass) {
           for (let c = 0; c < cols; c++) {
             let fillStep = distance[r][c];
 
-            if (classToAdd === "watered" && r === 0 && fillStep >= 0) {
+            if (r === 0 && fillStep >= 0) {
               fillStep = Math.max(fillStep, lastLowerFillStep + 1);
             }
 
@@ -847,13 +963,21 @@ function floodTunnel(whenDone, startRow, startCol, waterClass) {
     })(d);
   }
 
+  if (waterClass !== "dirty-watered") {
+    waterSoundTimeout = setTimeout(function () {
+      waterSound.pause();
+      waterSound.currentTime = 0;
+      waterSoundTimeout = null;
+    }, furthest * WATER_STEP_MS);
+  }
+
   setTimeout(function () {
     pumpEl.classList.add("flowing");
   }, furthest * WATER_STEP_MS + 150);
 
   setTimeout(function () {
     scrollToPump(whenDone);
-  }, furthest * WATER_STEP_MS + 900);
+  }, furthest * WATER_STEP_MS + 300);
 }
 
 /* ============================================================
@@ -1098,8 +1222,13 @@ function handleTileClick(event) {
   const row = Number(tileEl.dataset.row);
   const col = Number(tileEl.dataset.col);
 
+  if (board[row][col].isGoal) {
+    goalClicked = true;
+    clearMilestoneMessage();
+  }
+
   if (!hasCoarsePointer) {
-    digTile(row, col);
+    digAndCheckMilestones(row, col);
     return;
   }
 
@@ -1111,7 +1240,7 @@ function handleTileClick(event) {
     lastTappedTileKey = null;
     lastTileTapTime = 0;
     board[row][col].flagged = false;
-    digTile(row, col);
+    digAndCheckMilestones(row, col);
     return;
   }
 
@@ -1127,6 +1256,20 @@ function handleTileClick(event) {
 }
 
 boardEl.addEventListener("click", handleTileClick);
+
+muteBtn.addEventListener("click", function () {
+  soundOn = !soundOn;
+  const isMuted = !soundOn;
+  muteBtn.textContent = soundOn ? "🔊 Sound" : "🔇 Sound";
+  muteBtn.setAttribute("aria-pressed", isMuted ? "true" : "false");
+
+  if (isMuted) {
+    clearTimeout(waterSoundTimeout);
+    waterSoundTimeout = null;
+    waterSound.pause();
+    waterSound.currentTime = 0;
+  }
+});
 
 boardEl.addEventListener("contextmenu", function (event) {
   const tileEl = event.target.closest(".tile");
