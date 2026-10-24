@@ -122,7 +122,7 @@ const MILESTONES = [
     condition: function () {
       if (gameOver || goalClicked) return false;
 
-      const neighbours = neighbours8(goalRow, goalCol);
+      const neighbours = neighbours4(goalRow, goalCol);
       for (let i = 0; i < neighbours.length; i++) {
         if (board[neighbours[i][0]][neighbours[i][1]].revealed) return true;
       }
