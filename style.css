@@ -933,9 +933,9 @@ body {
 /* ---------- Small screens ---------- */
 
 @media (max-width: 600px) {
-  .header-inner { min-height: 96px; }
-  .cw-logo { left: 0; height: 40px; }
-  .header-text { left: 92px; }
+  .header-inner { min-height: 112px; }
+  .cw-logo { left: 50%; top: 58px; height: 44px; transform: translateX(-50%); }
+  .header-text { left: 0; }
   .header-text h1 { font-size: 21px; }
   .game-card { padding: 12px 12px 18px; }
   .status-bar { gap: 16px; }

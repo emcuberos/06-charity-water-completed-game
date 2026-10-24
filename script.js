@@ -52,10 +52,16 @@ const hasCoarsePointer =
   hasTouchEmulation;
 
 const digSound = new Audio("dig.mp3");
+digSound.preload = "auto";
+digSound.load();
 digSound.volume = 0.45;
 const loseSound = new Audio("lose.mp3");
+loseSound.preload = "auto";
+loseSound.load();
 loseSound.volume = 0.7;
 const waterSound = new Audio("water.mp3");
+waterSound.preload = "auto";
+waterSound.load();
 waterSound.volume = 0.6;
 
 /* ---------- Levels ----------
